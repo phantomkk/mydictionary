@@ -1,0 +1,78 @@
+﻿@model ListWordViewDto
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <form action="/home/index">
+                <div class="form-group">
+                    <input class="form-control" name="searchValue" placeholder="Search" />
+                </div>
+                <div class="form-group">
+                    <button class="btn  btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Briefly</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Words.Any())
+                    {
+                        @foreach (var word in Model.Words)
+                        {
+
+                            @if (word.FirstExampleSection?.Trim().Length != 0)
+                            {
+                                <tr>
+                                    <td><b>@word.Name</b></td>
+                                    <td>
+                                        @word.FirstExampleSection
+                                        <b>@word.Name</b>
+                                        @word.SecondExampleSection
+                                    </td>
+                                    <td>
+                                        <button type="button" onclick="deleteWord(@word.Id)" class="btn btn-default btn-sm">
+                                            <span class="glyphicon glyphicon-trash"></span>X
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td><b>@word.Name</b></td>
+                                    <td>
+                                    </td>
+
+                                </tr>
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="2">No data</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>

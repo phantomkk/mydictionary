@@ -1,0 +1,28 @@
+﻿@model ExampleDetailDto
+@{
+    ViewData["Title"] = "Detail";
+}
+<h1>Detail</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            @foreach (var newWord in Model.NewWords)
+            {
+            <span class="badge badge-success">@newWord.Name</span>
+            }
+        </div>
+    </div><br />
+    <div class="row">
+        <div class="col-lg-12">
+            <a href="@Model.Example.Url">Link</a>
+            <input type="hidden" value="@Model.Example.Id" id="exampleId" />
+            <pre style="white-space: pre-wrap;font-family:'Times New Roman'; font-size:18px"
+                 onclick="getTooltip(event)"      ontouchend="getTooltip(event)"
+                 >@Model.Example.Description</pre>
+        </div>
+        <div class="mytooltip">
+            <Button class="btn btn-primary btn-sm" onclick="addWord()">Add</Button>
+            <span id="description"></span>
+        </div>
+    </div> 
+</div>

@@ -1,0 +1,10 @@
+C:\Users\Luc\source\repos\MyDictionary\MyDictionary.DataAccess\bin\Release\netcoreapp3.1\MyDictionary.DataAccess.deps.json
+C:\Users\Luc\source\repos\MyDictionary\MyDictionary.DataAccess\bin\Release\netcoreapp3.1\MyDictionary.DataAccess.runtimeconfig.json
+C:\Users\Luc\source\repos\MyDictionary\MyDictionary.DataAccess\bin\Release\netcoreapp3.1\MyDictionary.DataAccess.runtimeconfig.dev.json
+C:\Users\Luc\source\repos\MyDictionary\MyDictionary.DataAccess\bin\Release\netcoreapp3.1\MyDictionary.DataAccess.dll
+C:\Users\Luc\source\repos\MyDictionary\MyDictionary.DataAccess\bin\Release\netcoreapp3.1\MyDictionary.DataAccess.pdb
+C:\Users\Luc\source\repos\MyDictionary\MyDictionary.DataAccess\obj\Release\netcoreapp3.1\MyDictionary.DataAccess.AssemblyInfoInputs.cache
+C:\Users\Luc\source\repos\MyDictionary\MyDictionary.DataAccess\obj\Release\netcoreapp3.1\MyDictionary.DataAccess.AssemblyInfo.cs
+C:\Users\Luc\source\repos\MyDictionary\MyDictionary.DataAccess\obj\Release\netcoreapp3.1\MyDictionary.DataAccess.dll
+C:\Users\Luc\source\repos\MyDictionary\MyDictionary.DataAccess\obj\Release\netcoreapp3.1\MyDictionary.DataAccess.pdb
+C:\Users\Luc\source\repos\MyDictionary\MyDictionary.DataAccess\obj\Release\netcoreapp3.1\MyDictionary.DataAccess.csprojAssemblyReference.cache
