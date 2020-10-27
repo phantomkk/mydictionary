@@ -106,6 +106,7 @@ namespace MyDictionary.Web
 
             services.AddSingleton<CachedService<ExampleDto>, ExampleCached>();
             services.AddSingleton<CachedService<NewWord>, WordCached>();
+            services.AddSingleton<LearningCached>();
 
 
             services.AddScoped<IWordRepos, WordRepos>();
@@ -117,6 +118,7 @@ namespace MyDictionary.Web
             services.AddScoped<IExampleService, ExampleService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IWordExampleService, WordExampleService>();
+            services.AddScoped<ILearningService, LearningService>();
 
             var configuration = new MapperConfiguration(cfg =>
             {
