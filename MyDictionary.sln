@@ -3,11 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDictionary.DataAccess", "MyDictionary.DataAccess\MyDictionary.DataAccess.csproj", "{004F7D69-A224-4D1B-B11D-BB500DF59129}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyDictionary.DataAccess", "MyDictionary.DataAccess\MyDictionary.DataAccess.csproj", "{004F7D69-A224-4D1B-B11D-BB500DF59129}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDictionary.Services", "MyDictionary.Services\MyDictionary.Services.csproj", "{CD871873-F504-486A-ACA8-38D780EC5F12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyDictionary.Services", "MyDictionary.Services\MyDictionary.Services.csproj", "{CD871873-F504-486A-ACA8-38D780EC5F12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDictionary.Web", "MyDictionary.Web\MyDictionary.Web.csproj", "{97027CC7-5ACC-4D58-9BEB-D3427EAC7CC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyDictionary.Web", "MyDictionary.Web\MyDictionary.Web.csproj", "{97027CC7-5ACC-4D58-9BEB-D3427EAC7CC0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDb.DataAccess", "MongoDb.DataAccess\MongoDb.DataAccess.csproj", "{C4093DD0-1D59-4930-AC6D-341EDCBC45B4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{B3AE0A2B-E984-4842-AC83-AD60ED81A445}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Service.Mongo", "Dictionary.Service.Mongo\Dictionary.Service.Mongo.csproj", "{B0FE4A54-FB38-4E1B-BEA1-1447B9362D50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +33,18 @@ Global
 		{97027CC7-5ACC-4D58-9BEB-D3427EAC7CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97027CC7-5ACC-4D58-9BEB-D3427EAC7CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97027CC7-5ACC-4D58-9BEB-D3427EAC7CC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4093DD0-1D59-4930-AC6D-341EDCBC45B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4093DD0-1D59-4930-AC6D-341EDCBC45B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4093DD0-1D59-4930-AC6D-341EDCBC45B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4093DD0-1D59-4930-AC6D-341EDCBC45B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3AE0A2B-E984-4842-AC83-AD60ED81A445}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3AE0A2B-E984-4842-AC83-AD60ED81A445}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3AE0A2B-E984-4842-AC83-AD60ED81A445}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3AE0A2B-E984-4842-AC83-AD60ED81A445}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0FE4A54-FB38-4E1B-BEA1-1447B9362D50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0FE4A54-FB38-4E1B-BEA1-1447B9362D50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0FE4A54-FB38-4E1B-BEA1-1447B9362D50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0FE4A54-FB38-4E1B-BEA1-1447B9362D50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

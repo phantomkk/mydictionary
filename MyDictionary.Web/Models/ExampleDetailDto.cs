@@ -1,9 +1,6 @@
-﻿using MyDictionary.DataAccess.Models;
+﻿using MyDictionary.Service.Mongo.Dtos;
 using MyDictionary.Services.Dtos;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyDictionary.Web.Models
 {

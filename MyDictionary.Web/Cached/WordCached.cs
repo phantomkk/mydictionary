@@ -1,9 +1,4 @@
-﻿using MyDictionary.DataAccess.Models;
-using MyDictionary.Services.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MyDictionary.Services.Dtos;
 
 namespace MyDictionary.Web.Cached
 {

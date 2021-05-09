@@ -6,9 +6,10 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MyDictionary.Service.Mongo.Dtos;
 using MyDictionary.Services.Dtos;
 using MyDictionary.Services.Services;
-using MyDictionary.Web.Cached; 
+using MyDictionary.Web.Cached;
 
 namespace MyDictionary.Web.ApiControllers
 {
@@ -18,31 +19,28 @@ namespace MyDictionary.Web.ApiControllers
     {
 
         private readonly ILogger<WordApiController> _logger;
-        private IWordService _wordService;
-        private IWordExampleService _wordExampleService;
+        private IWordService _wordService; 
         private CachedService<NewWord> _cachedService;
         private IMapper _mapper;
         public WordApiController(ILogger<WordApiController> logger,
-            IWordService wordService,
-            IWordExampleService wordExampleService,
+            IWordService wordService, 
             CachedService<NewWord> cachedService,
             IMapper mapper)
         {
             _logger = logger;
-            _wordService = wordService;
-            _wordExampleService = wordExampleService;
+            _wordService = wordService; 
             _cachedService = cachedService;
             _mapper = mapper;
         }
 
         [HttpGet]
         [Route("GetNewWords")]
-        public IEnumerable<NewWord> GetNewWords()
+        public async Task<IEnumerable<NewWord>> GetNewWordsAsync()
         {
             IEnumerable<NewWord> result = _cachedService.GetCachedData();
             if (result == null)
             {
-                result = _wordService.GetNewWords();
+                result = await _wordService.GetNewWords();
                 _cachedService.SaveToCached(result);
             }
             return result;
@@ -59,9 +57,9 @@ namespace MyDictionary.Web.ApiControllers
 
         [HttpPost]
         [Route("Add")]
-        public bool Add([FromBody]AddWordDto dto)
+        public async Task<bool> AddAsync([FromBody]AddWordDto dto)
         {
-            var result = _wordService.UpdateAsNewWord(dto);
+            var result = await _wordService.UpdateAsNewWordAsync(dto);
             if (result)
             {
                 _cachedService.Clear();
@@ -71,9 +69,9 @@ namespace MyDictionary.Web.ApiControllers
 
         [HttpGet]
         [Route("DeleteNewWord")]
-        public bool DeleteNewWord(int wordId)
+        public async Task<bool> DeleteNewWordAsync(string wordId)
         {
-            var word = _wordService.GetById(wordId);
+            var word = await _wordService.GetById(wordId);
             if (word != null)
             {
                 word.IsNew = false;

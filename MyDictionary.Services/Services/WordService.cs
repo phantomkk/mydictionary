@@ -10,7 +10,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Web.Http;
 
 namespace MyDictionary.Services.Services
 {
@@ -34,11 +38,21 @@ namespace MyDictionary.Services.Services
         public void AddWordAndExample(WordAndExampleDto dto)
         {
             _unitOfWork.BeginTransaction();
-            var distinctedWords = WordUtils.ExtractDistinct(dto.Description);
+            var description = dto.Description;
+            var distinctedWords = WordUtils.ExtractDistinct(description);
+            //var tokens = Regex.Split(dto.Description, "\r\n").Where(x => x.Trim() != string.Empty).ToArray();
+            //if (tokens.Length % 2 != 0)
+            //{
+            //    var errors = new List<string>() { "Khong the luu description" };
+
+            //    throw new HttpResponseException(new HttpResponseMessage() { 
+            //        Content = new StringContent("Khong the luu description"), StatusCode = HttpStatusCode.BadRequest });
+            //}
+            var idxSub = description.Length > 200 ? description.Substring(0, 200) : description.Substring(0, description.Length/2);
             var example = _exampleRepos.Create(new Example
             {
-                Name = dto.Description.Substring(0, 200),
-                Description = dto.Description,
+                Name = idxSub,
+                Description = description,
                 CreatedAt = DateTimeOffset.Now,
                 Url = dto.Url
             });
@@ -59,12 +73,12 @@ namespace MyDictionary.Services.Services
         public IEnumerable<NewWord> GetNewWords()
         {
             var firs = DateTime.Now.Second;
-            var listNewWords =  _mapper.Map<IEnumerable<WordDto>>(
-                      _mainRepos.Filter(x => x.IsNew).ToList()).ToList(); 
-            var wordExamples = _wordExampleRepos.FilterByWordId( listNewWords.Select(w => w.Id).ToList()).ToList();
+            var listNewWords = _mapper.Map<IEnumerable<WordDto>>(
+                      _mainRepos.Filter(x => x.IsNew).ToList()).ToList();
+            var wordExamples = _wordExampleRepos.FilterByWordId(listNewWords.Select(w => w.Id).ToList()).ToList();
 
             var sec = DateTime.Now.Second;
-            var resultt = sec - firs; 
+            var resultt = sec - firs;
             var result = listNewWords.Select(x =>
             {
                 var firstExample = wordExamples.First(e => e.WordId == x.Id).Example.Description; ;

@@ -10,10 +10,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <span>@Model.Key</span><button type="button" onclick="show(); return false;" class="btn btn-sm">show</button>
+            <span>@Model.Value</span><button type="button" onclick="show(); return false;" class="btn btn-sm">show</button>
             <br />
             <br />
-            <span style="display:none" id="hiddenContent">@Model.Value</span>
+            <span style="display:none" id="hiddenContent">@Model.Key</span>
             <br />
             <form action="/learning/">
                 <button type="submit">Next</button>

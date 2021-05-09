@@ -7,7 +7,7 @@ namespace MyDictionary.Web.Utils
 {
     public class WordUtils
     {
-        public IEnumerable<string> ExtractDistinct(string source)
+        public static IEnumerable<string> ExtractDistinct(string source)
         {
             var words = source.Split(' ','\n');
             var wordsDistinct = words.Distinct();

@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
-using MyDictionary.DataAccess.Models;
+using MongoDb.DataAccess.Entities;
+using MyDictionary.Service.Mongo.Dtos;
 using MyDictionary.Services.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyDictionary.Web.Utils
 {
@@ -12,17 +9,23 @@ namespace MyDictionary.Web.Utils
     {
         public AppProfiles()
         {
-            CreateMap<Word, WordDto>().ForMember(dest => dest.Examples, src => src.MapFrom(x => x.Examples));
-            CreateMap<WordDto, Word>();
+            CreateMap<Word, WordDto>()
+                .ForMember(dest => dest.Id, src => src.MapFrom(x => x.Id.ToString()))
+                .ForMember(dest => dest.ExamplesIds, src => src.MapFrom(x => x.ExampleIds))
+                ;
+           // CreateMap<WordDto, Word>();
+             
+            CreateMap<Example , ExampleDto>()
+                .ForMember(dest => dest.Id, src => src.MapFrom(x => x.Id.ToString()))
+                .ForMember(dest => dest.Words, src => src.Ignore ());
+          //  CreateMap<ExampleDto, Example>();
 
-            CreateMap<Example, ExampleDto>().ForMember(dest=>dest.Words, src=>src.MapFrom(x=>x.Words));
-            CreateMap<ExampleDto, Example>();
+            CreateMap<User, UserDto>()
+                .ForMember(dest => dest.Id, src => src.MapFrom(x => x.Id.ToString()));
+           // CreateMap<UserDto, User>();
 
-            CreateMap<User, UserDto>();
-            CreateMap<UserDto, User>();
-
-            CreateMap<WordExample, WordExampleDto>();
-            CreateMap<WordExampleDto, WordExample>();
+         //   CreateMap<WordExample, WordExampleDto>();
+          //  CreateMap<WordExampleDto, WordExample>();
         }
     }
 }

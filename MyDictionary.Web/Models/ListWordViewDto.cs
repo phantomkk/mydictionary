@@ -1,9 +1,5 @@
-﻿using MyDictionary.DataAccess.Models;
-using MyDictionary.Services.Dtos; 
-using System;
+﻿using MyDictionary.Services.Dtos;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyDictionary.Web.Models
 {

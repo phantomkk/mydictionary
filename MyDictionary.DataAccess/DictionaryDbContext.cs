@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using MyDictionary.DataAccess.Context;
 using MyDictionary.DataAccess.Models;
 using System;
@@ -18,7 +20,14 @@ namespace MyDictionary.DataAccess
         {
             Database.EnsureCreated();
         }
-
+        public static readonly ILoggerFactory loggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
+  
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLoggerFactory(loggerFactory)  //tie-up DbContext with LoggerFactory object
+                .EnableSensitiveDataLogging();
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Word>()
@@ -29,6 +38,7 @@ namespace MyDictionary.DataAccess
 
             modelBuilder.Entity<Example>()
                 .Property(x => x.Id).ValueGeneratedOnAdd();
+
             modelBuilder.Entity<User>()
                 .Property(x => x.Id).ValueGeneratedOnAdd(); 
 

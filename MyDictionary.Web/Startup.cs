@@ -1,27 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
 using AutoMapper;
+using Infrastructure.Configuration;
+using Infrastructure.DependencyInjection;
+using Infrastructure.MongoDb;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using MyDictionary.DataAccess;
-using MyDictionary.DataAccess.Models;
-using MyDictionary.DataAccess.Repositories;
+using MyDictionary.Service.Mongo.Services;
 using MyDictionary.Services.Dtos;
 using MyDictionary.Services.Services;
 using MyDictionary.Web.Cached;
-using MyDictionary.Web.DataAccess.Context; 
 using MyDictionary.Web.Utils;
-using Newtonsoft.Json.Serialization;
 
 namespace MyDictionary.Web
 {
@@ -37,8 +28,12 @@ namespace MyDictionary.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DictionaryDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("defaultcnnString")));
+            //services.AddDbContext<DictionaryDbContext>(options =>
+            //options.UseSqlServer(Configuration.GetConnectionString("defaultcnnString")));
+
+            services.AddSingleton<MongoDbConfig>(Configuration.GetConfiguration<MongoDbConfig>()); 
+
+            services.AddSingleton<IMongoDbContext, MongoDbContext>();
             ConfigDependencyInjection(services);
             services.AddSwaggerGen(c =>
             {
@@ -102,30 +97,26 @@ namespace MyDictionary.Web
         }
         private void ConfigDependencyInjection(IServiceCollection services)
         {
-            services.AddScoped<IUnitOfWork<DictionaryDbContext>, UnitOfWork<DictionaryDbContext>>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddSingleton<CachedService<ExampleDto>, ExampleCached>();
             services.AddSingleton<CachedService<NewWord>, WordCached>();
             services.AddSingleton<LearningCached>();
 
 
-            services.AddScoped<IWordRepos, WordRepos>();
-            services.AddScoped<IWordExampleRepos, WordExampleRepos>();
-            services.AddScoped<IExampleRepos, ExampleRepos>();
-            services.AddScoped<IUserRepos, UserRepos>();
-
+            services.AddSingleton<IDependencyResolver, DependencyResolver>();
             services.AddScoped<IWordService, WordService>();
             services.AddScoped<IExampleService, ExampleService>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IWordExampleService, WordExampleService>();
+            //services.AddScoped<IUserService, UserService>(); 
             services.AddScoped<ILearningService, LearningService>();
 
             var configuration = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<AppProfiles>();
             });
-
+            configuration.AssertConfigurationIsValid();
             services.AddSingleton(configuration.CreateMapper());
+            services.AddControllers().AddNewtonsoftJson();
 
         }
     }

@@ -6,9 +6,10 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MyDictionary.Service.Mongo.Dtos;
 using MyDictionary.Services.Dtos;
 using MyDictionary.Services.Services;
-using MyDictionary.Web.Cached; 
+using MyDictionary.Web.Cached;
 using MyDictionary.Web.Models;
 
 namespace MyDictionary.Web.ApiControllers
@@ -20,23 +21,20 @@ namespace MyDictionary.Web.ApiControllers
 
 
         private readonly ILogger<ExampleApiController> _logger;
-        private IWordService _wordService;
-        private IWordExampleService _wordExampleService;
+        private IWordService _wordService; 
         private IExampleService _exampleService;
         private CachedService<ExampleDto> _cachedService;
         private IMapper _mapper;
 
         public ExampleApiController(ILogger<ExampleApiController> logger,
             IWordService wordService,
-            IExampleService exampleService,
-            IWordExampleService wordExampleService,
+            IExampleService exampleService, 
             CachedService<ExampleDto> cachedService,
             IMapper mapper)
         {
             _logger = logger;
             _wordService = wordService;
-            _exampleService = exampleService;
-            _wordExampleService = wordExampleService;
+            _exampleService = exampleService; 
             _cachedService = cachedService;
             _mapper = mapper;
         }
@@ -58,14 +56,14 @@ namespace MyDictionary.Web.ApiControllers
         }
 
         [HttpGet("[controller]/Detail/{exampleId}")]
-        public ExampleDetailDto Detail(int exampleId)
+        public async Task<ExampleDetailDto> DetailAsync(string exampleId)
         {
-            var example = _exampleService.GetById(exampleId);
-            var wordEntities = _wordExampleService.Filter(x => x.ExampleId == exampleId);
+            var example = await _exampleService.GetById(exampleId);
+            var wordEntities = await _wordService.Filter(x => x.ExampleIds.Contains(exampleId) && x.IsNew);
             return new ExampleDetailDto
             {
                 Example = _mapper.Map<ExampleDto>(example),
-                NewWords = _mapper.Map<List<WordDto>>(wordEntities.Select(x => x.Word).Where(x => x.IsNew).ToList())
+                NewWords = _mapper.Map<List<WordDto>>(wordEntities.Select(x => x.Name))
             };
         }
 
@@ -73,7 +71,7 @@ namespace MyDictionary.Web.ApiControllers
         [Route("Add")]
         public bool Add(WordAndExampleDto data)
         {
-            _wordService.AddWordAndExample(data);
+            _wordService.AddWordAndExampleAsync(data);
             _cachedService.Clear();
             return true;
         }

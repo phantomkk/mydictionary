@@ -25,10 +25,14 @@
             @foreach (var example in Model.Examples)
             {
                 <span style="color:red;"><a href="/Example/Detail/@example.Id">Detail</a>&emsp; @example.CreatedAt</span>
-                <label>@example.Description.Substring(0, 200)</label><br />
-                 @foreach (var newWord in example.Words)
                 {
-                    <span class="badge badge-success">@newWord.Word.Name</span>
+                    var desLen = example.Description.Length;
+                    var descript = desLen >= 200 ? example.Description.Substring(0, 200) : example.Description.Substring(0, desLen / 2);
+                    <label>@descript</label><br />
+                }
+                @foreach (var newWord in example.Words)
+                {
+                    <span class="badge badge-success">@newWord.Name</span>
                 }
                 <br />
             }

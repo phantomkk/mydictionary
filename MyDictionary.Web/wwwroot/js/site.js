@@ -56,7 +56,7 @@ function getSelectionText() {
 }
 
 function addWord() {
-    var exId = parseInt($("#exampleId").val());
+    var exId = $("#exampleId").val();
     var word = getSelectionText();
     var jsoon = JSON.stringify({
         exampleId: exId,

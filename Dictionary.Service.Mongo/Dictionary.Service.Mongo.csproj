@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>MyDictionary.Service.Mongo</AssemblyName>
+    <RootNamespace>MyDictionary.Service.Mongo</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MongoDb.DataAccess\MongoDb.DataAccess.csproj" />
+  </ItemGroup>
+
+</Project>
