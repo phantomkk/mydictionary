@@ -44,7 +44,9 @@ namespace MyDictionary.Services.Services
 
         public async Task<bool> Update(T model)
         {
-            throw new NotImplementedException();
+            await _mainRepos.Update(model);
+
+            return true;
         }
 
         public async Task<bool> Delete(T model)

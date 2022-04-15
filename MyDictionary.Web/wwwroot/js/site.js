@@ -2,13 +2,14 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-function deleteWord(wordId) {
+function deleteWord(wordGuid) {
+    console.log(wordGuid);
     $.ajax({
         cache: false,
         type: 'get',
-        url: '/Home/DeleteNewWord/',
-        contentType: "application/json;",
-        data: { wordId: wordId},
+        url: '/DeleteNewWord',
+        contentType: "application/json",
+        data: { wordId: wordGuid },
         success: function (data, status, xhr) {
             alert("Data: " + data + "\nStatus: " + status);
         }

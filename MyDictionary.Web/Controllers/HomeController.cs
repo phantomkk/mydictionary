@@ -55,7 +55,8 @@ namespace MyDictionary.Web.Controllers
             }
             return result;
         }
-
+        [HttpGet]
+        [Route("DeleteNewWord")]
         public async Task<bool> DeleteNewWordAsync(string wordId)
         {
             var word = await _wordService.GetById(wordId);
@@ -66,7 +67,7 @@ namespace MyDictionary.Web.Controllers
             }
             _cachedService.Clear();
             return true;
-        }
+        } 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

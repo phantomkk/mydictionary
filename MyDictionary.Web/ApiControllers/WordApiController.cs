@@ -75,7 +75,7 @@ namespace MyDictionary.Web.ApiControllers
             if (word != null)
             {
                 word.IsNew = false;
-                _wordService.Update(word);
+                await _wordService.Update(word);
             }
             _cachedService.Clear();
             return true;

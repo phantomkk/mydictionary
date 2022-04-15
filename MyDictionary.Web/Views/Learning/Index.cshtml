@@ -10,10 +10,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <span>@Model.Value</span><button type="button" onclick="show(); return false;" class="btn btn-sm">show</button>
+            <span>@Model.Key</span><button type="button" onclick="show(); return false;" class="btn btn-sm">show</button>
             <br />
             <br />
-            <span style="display:none" id="hiddenContent">@Model.Key</span>
+            <span style="display:none" id="hiddenContent">@Model.Value</span>
             <br />
             <form action="/learning/">
                 <button type="submit">Next</button>
@@ -21,8 +21,10 @@
         </div>
     </div>
     <script type="text/javascript">
+        var disp = false;
         function show() {
-            document.getElementById("hiddenContent").style.cssText = "display:block";
+            disp = !disp;
+            document.getElementById("hiddenContent").style.cssText = disp ? "display:block" : "display:none";
         }
     </script>
 </div>

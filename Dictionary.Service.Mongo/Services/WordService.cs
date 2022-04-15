@@ -66,7 +66,8 @@ namespace MyDictionary.Services.Services
 
                var wordIndex = firstExample.Description.IndexOf(x.Name);
                var firstSection = firstExample.Description.Substring(wordIndex - 100 > 0 ? wordIndex - 100 : 0, 100);
-               var secondSection = firstExample.Description.Substring(wordIndex + x.Name.Length, 100 <= firstExample.Description.Length ? 100 : firstExample.Description.Length);
+               var endSecIndex = wordIndex + x.Name.Length + 100 >= firstExample.Description.Length ?   firstExample.Description.Length - (wordIndex + x.Name.Length) : 100;
+               var secondSection = firstExample.Description.Substring(wordIndex + x.Name.Length, endSecIndex);
 
 
                return new NewWord
